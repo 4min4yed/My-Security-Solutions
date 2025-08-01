@@ -14,32 +14,31 @@ curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/inst
 
 ---
 
-## 2. Run a targeted filesystem scan
+## 2. Run a targeted filesystem vulnerability scan
 
 Example command for scanning `/etc`:
 
 ```bash
-trivy fs /etc --format table --output trivy-report.txt
+trivy fs /etc --format table --output trivy-report
 ```
+*remove the last part if you want to view output on terminal*
 
 Common folders to scan individually:
 - `/etc`
 - `/usr/sbin`
 - `/usr/bin`
 - `/var/log/fail2ban`
-
-Run a separate `trivy fs` command for each.
+└─>Run a separate `trivy fs` command for each.
 
 ---
 
-## 3. Transfer the report to your local machine
+## 3. Scan for exposed secrets (private keys, passwords...)
 
-From your **local machine**, run:
+preferably scan the entire filesystem `/`: 
 
 ```bash
-scp user@container-ip:/path/to/trivy-report.txt /local/path/
+trivy fs / --scanners secret
 ```
-
 ---
 
 ## 4. Best way to view table output file
