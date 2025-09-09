@@ -2,9 +2,11 @@
 
 ### Problem
 SSH port is discoverable after running a scan tool like `nmap`.
+![open ports](Images/port-open.png)
 
 ### Solution
 After implementing **Port Knocking**:
+![filtered ports](Images/filtered-port.png)
 
 ### Steps
 
