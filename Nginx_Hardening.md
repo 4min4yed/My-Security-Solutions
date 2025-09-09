@@ -3,6 +3,7 @@
 ## Problem I
 
 Visiting `www.site/random`
+![](images/random.png)
 
 ### The Fix
 Edit `nginx.conf` of the Nginx server (not the reverse proxy) inside the Angular app located at  
@@ -23,7 +24,9 @@ server {
 
 ### PoC
 - **Before Configuration**
+  ![](images/random.png)
 - **After Configuration**
+  ![](images/random_fix.png)
 
 ---
 
@@ -40,4 +43,23 @@ add_header X-Powered-By "";         # remove any accidental X-Powered-By headers
 
 ### PoC
 - **Before**
+  ![](images/nmap_exposed.png)
 - **After**
+  ![](images/nmap_hidden.png)
+
+## Problem III
+
+By default, some files may be publicly accessible by default or upon installation (like README.md or .conf files...)
+So to hide certain files via extension or files locations:
+
+```nginx
+server {
+            ...
+
+    location / {
+…
+ #DENY EXTENSIONS
+       location ~* \.(md|git|env|json|lock|ts|js\.map)$ {deny all;}
+	#DENY FOLDERS
+       location ~ ^/(node_modules|e2e|src)/ {deny all;}}}
+```
